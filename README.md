@@ -9,7 +9,7 @@ This project is supported by a basic backend using [JSON Server](https://www.npm
 
 ## Running the project
 
-If you run the following command:
+Run the project with:
 
 `npm run start`
 
@@ -23,11 +23,9 @@ This endpoint will return an array of 200 fake companies. You can verify that th
 
 ## The task
 
-Your task is to write a React application that fetches the company data from the backend and displays it in a method of your choosing. You could display the companies in a table, or as "cards" on a grid, or a stack, you could implement pagination and only show 10 at a time, the choice is yours!
+The task is to write a React application that fetches the company data from the backend and displays it in a method of your choosing. You could display the companies in a table, or as "cards" on a grid, or a stack, you could implement pagination and only show 10 at a time.
 
-Start by cloning this repo and committing your changes to your own GitHub repo.
-
-### What we expect from you
+### What is expected
 
 - A GitHub repo containing project that fits the brief above, but it doesn't have to be perfect or look amazing! The important thing is that you can demonstrate certain key skills.
 - Some information about your project, such as how it works and what it does along with particular instructions on how to run your project
@@ -42,7 +40,3 @@ Bonus points will be awarded for:
 - Using Redux
 - Using TypeScript appropriately in your React components or Redux actions/reducers
 - Using Material UI, or alternatively `styled-components`
-
-
-## Good luck!
-If at any point you need any guidance or pointers, or if anything doesn't make sense, please get in touch! Otherwise, have fun and good luck!
