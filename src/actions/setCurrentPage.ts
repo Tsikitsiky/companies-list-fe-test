@@ -1,7 +1,7 @@
-import { SET_CURRENT_PAGE } from "../reducers/constant";
+import { SET_CURRENT_PAGE } from "../reducers/constants";
 
-const setCurrentPage = (page: number) => {
-return { type: SET_CURRENT_PAGE, payload: page }
+const setCurrentPage = (payload: number) => {
+  return { type: SET_CURRENT_PAGE, payload }
 }
 
 export default setCurrentPage
