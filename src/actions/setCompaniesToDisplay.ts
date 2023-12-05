@@ -1,8 +1,8 @@
-import { SET_COMPANIES_TO_DISPLAY } from "../reducers/constant";
+import { SET_COMPANIES_TO_DISPLAY } from "../reducers/constants";
 import { CompanyType } from "../types";
 
-const setCompaniesToDisplay = (companies: CompanyType[]) => {
-return { type: SET_COMPANIES_TO_DISPLAY, payload: companies }
+const setCompaniesToDisplay = (payload: CompanyType[]) => {
+  return { type: SET_COMPANIES_TO_DISPLAY, payload }
 }
 
 export default setCompaniesToDisplay
