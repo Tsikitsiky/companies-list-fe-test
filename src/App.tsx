@@ -1,7 +1,19 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  TableContainer,
+  HStack,
+  Button,
+  Text,
+  Stack
+} from '@chakra-ui/react'
 
+import './App.css';
 import getCompanies from './api/getCompanies';
 import { CompanyType, StateType } from './types';
 import setCompanies from './actions/getCompanies';
@@ -11,7 +23,7 @@ import CompanyCard from './components/companyCard';
 
 function App() {
   const dispatch = useDispatch();
-  const { companies, companiesToDisplay,  currentPage } = useSelector((state: { task: StateType }) => state.task)
+  const { companies, companiesToDisplay, currentPage } = useSelector((state: { task: StateType }) => state.task)
   const pageCounts = Math.ceil(companies?.length / 10)
   const arrays: any = []; // should be renamed to be more descriptive
   const chunkSize = 10;
@@ -41,33 +53,40 @@ function App() {
     dispatch(setCompaniesToDisplay(comp))
   }, [currentPage, arrays?.length])
 
-
+  const isPrevDisabled = currentPage === 1
+  const isNextDisabled = currentPage === pageCounts
   return (
-    <div>
-      <section>
-        <table>
-          <thead>
-          <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Website</th>
-          </tr>
-          </thead> 
-          <tbody>
-           {companiesToDisplay?.map((c) => <CompanyCard c={c} key={c.id}/>)} 
-          </tbody>
-        </table>
-        <div className='paginationContainer'>
-          <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Prev</button>
-          <button onClick={() => handlePageChange(1)}>1</button>
-          <button onClick={() => handlePageChange(2)}>2</button>
-          <button onClick={() => handlePageChange(3)}>3</button>
-          <span>...</span>
-          <button disabled={currentPage === pageCounts} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
-        </div>
-      </section>
-    </div>
+    <Stack justifyContent={'center'} align={'center'}>
+      <TableContainer w={'100%'}>
+        <Table variant='striped' colorScheme='blue'>
+          <Thead>
+            <Tr>
+              <Th isNumeric>Id</Th>
+              <Th>Name</Th>
+              <Th>Description</Th>
+              <Th>Website</Th>
+            </Tr>
+          </Thead>
+
+          <Tbody>
+            {companiesToDisplay?.map((c) => <CompanyCard c={c} key={c.id} />)}
+          </Tbody>
+        </Table>
+      </TableContainer>
+      <HStack>
+        <Button
+          pointerEvents={isPrevDisabled ? 'none' : 'inherit'}
+          disabled={isPrevDisabled}
+          onClick={() => !isPrevDisabled && handlePageChange(currentPage - 1)}>Prev</Button>
+        <Button onClick={() => handlePageChange(1)}>1</Button>
+        <Button onClick={() => handlePageChange(2)}>2</Button>
+        <Button onClick={() => handlePageChange(3)}>3</Button>
+        <Text>...</Text>
+        <Button
+          disabled={isNextDisabled}
+          onClick={() => !isNextDisabled && handlePageChange(currentPage + 1)}>Next</Button>
+      </HStack>
+    </Stack>
   );
 }
 
