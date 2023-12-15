@@ -25,14 +25,13 @@ function App() {
   const dispatch = useDispatch();
   const { companies, companiesToDisplay, currentPage } = useSelector((state: { task: StateType }) => state.task)
   const pageCounts = Math.ceil(companies?.length / 10)
-  const arrays: any = []; // should be renamed to be more descriptive
+  const arrayOfChunks: any = [];
   const chunkSize = 10;
 
-  // Using useCallback here to improve performance /to cache the function as it's quite an expensive function
   const fetchCompanies = useCallback(async () => {
     const comp: CompanyType[] = await getCompanies()
     dispatch(setCompanies(comp))
-  }, [])
+  }, [companies])
 
   const handlePageChange = (nextPage: number) => {
     dispatch(setCurrentPage(nextPage))
@@ -40,18 +39,18 @@ function App() {
 
   useEffect(() => {
     fetchCompanies()
-  }, [fetchCompanies])
+  }, [])
 
 
   for (let i = 0; i < companies?.length; i += chunkSize) {
     const chunk = companies.slice(i, i + chunkSize);
-    arrays.push(chunk)
+    arrayOfChunks.push(chunk)
   }
 
   useEffect(() => {
-    const comp = arrays[currentPage - 1]
+    const comp = arrayOfChunks[currentPage - 1]
     dispatch(setCompaniesToDisplay(comp))
-  }, [currentPage, arrays?.length])
+  }, [currentPage, arrayOfChunks?.length])
 
   const isPrevDisabled = currentPage === 1
   const isNextDisabled = currentPage === pageCounts
