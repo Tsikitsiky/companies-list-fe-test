@@ -1,4 +1,4 @@
-# Front End Tech Test
+# Front End Tech Challenge
 
 ## Background information
 
